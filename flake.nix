@@ -72,10 +72,8 @@
         python = py:
           with py; [
             debugpy
-            pylint
-            pyls-isort
-            pylsp-mypy
             pytest
+            python-lsp-ruff
             python-lsp-server
           ];
       };

@@ -124,7 +124,6 @@ return {
 			filetypes = { "go", "gomod", "gowork", "gotmpl", "templ" },
 		},
 	},
-	-- {"pyright", lsp = {}, },
 	{
 		"pylsp",
 		lsp = {
@@ -133,20 +132,54 @@ return {
 			settings = {
 				pylsp = {
 					plugins = {
-						-- formatter options
-						black = { enabled = false },
+						-- Defaults to disable
 						autopep8 = { enabled = false },
-						yapf = { enabled = false },
-						-- linter options
-						pylint = { enabled = true, executable = "pylint" },
-						pyflakes = { enabled = false },
 						pycodestyle = { enabled = false },
-						-- type checker
-						pylsp_mypy = { enabled = true },
-						-- auto-completion options
+						pyflakes = { enabled = false },
+						yapf = { enabled = false },
+
 						jedi_completion = { fuzzy = true },
-						-- import sorting
-						pyls_isort = { enabled = true },
+						ruff = {
+							enabled = true,
+							select = {
+								"F", -- Pyflakes
+								"W", -- Pycodestyle (warnings)
+								"E", -- Pycodestyle (errors)
+								"N", -- pep8-naming
+								"ANN", -- flake8-annotations
+								"B", -- flake8-bugbear
+								"FA", -- flake8-future-annotations
+								"TID", -- flake8-tidy-imports
+								"UP007", -- flake8-new-union-types equivalent rule
+								"RUF", -- ruff's custom rules
+							},
+							ignore = {
+								"ANN002", -- Missing type annotation for *args
+								"ANN003", -- Missing type annotation for **kwargs
+								"ANN101", -- Missing type annotation for self in method
+								"ANN102", -- Missing type annotation for cls in classmethod
+								"ANN201", -- Missing type annotation for public function
+								"ANN204", -- Missing return type annotation for special method
+								"B904", -- Exception raised within try-except should use raise ... from exc
+								"E501", -- Line too long
+								"RUF012", -- Mutable class attributes should be annotated with `typing.ClassVar`
+
+								-- Redundant rules with ruff-format:
+								"COM812", -- Missing trailing comma (in multi-line lists/tuples/...)
+								"COM819", -- Prohibited trailing comma (in single-line lists/tuples/...)
+								"D206", -- Checks for docstrings indented with tabs
+								"D300", -- Checks for docstring that use ''' instead of """
+								"E111", -- Indentation of a non-multiple of 4 spaces
+								"E114", -- Comment with indentation  of a non-multiple of 4 spaces
+								"E117", -- Checks for over-indented code
+								"ISC001", -- Single line implicit string concatenation ("hi" "hey" -> "hihey")
+								"ISC002", -- Multi line implicit string concatenation
+								"Q000", -- Checks of inline strings that use wrong quotes (' instead of ")
+								"Q001", -- Multiline string that use wrong quotes (''' instead of """)
+								"Q002", -- Checks for docstrings that use wrong quotes (''' instead of """)
+								"Q003", -- Checks for avoidable escaped quotes ("\"" -> '"')
+							},
+						},
 					},
 				},
 			},
