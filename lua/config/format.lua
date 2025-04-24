@@ -16,7 +16,7 @@ return {
         c = { "clang_format" },
         cmake = { "cmake_format" }, -- FIXME
         cpp = { "clang_format" },
-        go = { "goimports", "gofmt" }, -- "golint"
+        go = { "gofumpt", lsp_format = "first" },
         javascript = { "prettierd", "prettier", stop_after_first = true },
         json = { "prettierd", "prettier", stop_after_first = true },
         lua = { "stylua" },

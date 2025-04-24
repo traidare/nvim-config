@@ -91,6 +91,7 @@
           delve
           go
           go-tools
+          gofumpt
           golangci-lint
           golint
           gopls
@@ -126,7 +127,7 @@
           nushell
         ];
         python = [
-          black
+          ruff
         ];
         C = [
           clang-tools
@@ -177,8 +178,8 @@
           core = [
             conform-nvim
             nvim-lspconfig
-            sort-nvim
             pkgs.neovimPlugins.diagflow
+            sort-nvim
           ];
         };
         go = [
@@ -200,7 +201,7 @@
           nvim-treesitter
           nvim-treesitter-textobjects
         ];
-        other = [
+        extra = [
           which-key-nvim
         ];
       };
@@ -220,7 +221,9 @@
 
         categories = {
           C = true;
+          data = true;
           debug = false;
+          extra = true;
           general = true;
           go = true;
           gui = true;
