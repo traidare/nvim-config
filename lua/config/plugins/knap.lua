@@ -1,4 +1,3 @@
--- https://github.com/frabjous/knap#user-content-default-configuration
 local gknapsettings = {
 	htmloutputext = "html",
 	htmltohtml = "none",
@@ -11,6 +10,7 @@ local gknapsettings = {
 	mdtohtmlviewerlaunch = "falkon %outputfile%",
 	mdtohtmlviewerrefresh = "none",
 
+    -- TODO: create and open files in /tmp
 	mdtopdf = "pandoc %docroot% -o %outputfile% --pdf-engine=lualatex --template eisvogel --listings -V lang=de -V disable-header-and-footer=true",
 	-- -V colorlinks=true -V linkcolor=blue
 	-- --pdf-engine-opt=STRING
@@ -18,6 +18,7 @@ local gknapsettings = {
     mdtopdfviewerlaunch = "mupdf %outputfile%",
 	mdtopdfviewerrefresh = "none",
 
+    -- TODO: create and open files in /tmp
 	texoutputext = "pdf",
 	textopdf = "lualatex -interaction=batchmode -synctex=1 --output-format=pdf %docroot%",
 	--textopdfviewerlaunch = "sioyek --inverse-search 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,%3)\"' --new-window %outputfile%",
