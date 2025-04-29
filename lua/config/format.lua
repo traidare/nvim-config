@@ -65,7 +65,7 @@ return {
             "--quiet",
             "--stdin",
             "--tabsize",
-            "4",
+            "2",
             "--nowrap",
           },
         },
