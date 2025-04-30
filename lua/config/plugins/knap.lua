@@ -14,19 +14,19 @@ local gknapsettings = {
 	mdtopdf = "pandoc %docroot% -o %outputfile% --pdf-engine=lualatex --template eisvogel --listings -V lang=de -V disable-header-and-footer=true",
 	-- -V colorlinks=true -V linkcolor=blue
 	-- --pdf-engine-opt=STRING
-	--mdtopdfviewerlaunch = "sioyek --new-window %outputfile%",
-    mdtopdfviewerlaunch = "mupdf %outputfile%",
+	mdtopdfviewerlaunch = "sioyek --new-window %outputfile%",
+    --mdtopdfviewerlaunch = "mupdf %outputfile%",
 	mdtopdfviewerrefresh = "none",
 
     -- TODO: create and open files in /tmp
 	texoutputext = "pdf",
 	textopdf = "lualatex -interaction=batchmode -synctex=1 --output-format=pdf %docroot%",
-	--textopdfviewerlaunch = "sioyek --inverse-search 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,%3)\"' --new-window %outputfile%",
+	textopdfviewerlaunch = "sioyek --inverse-search 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,%3)\"' --new-window %outputfile%",
 	--textopdfviewerlaunch = "mupdf %outputfile%",
-	textopdfviewerlaunch = "evince %outputfile%",
+	--textopdfviewerlaunch = "evince %outputfile%",
 	textopdfviewerrefresh = "none",
-	--textopdfforwardjump = "sioyek --inverse-search 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,%3)\"' --reuse-window --forward-search-file %srcfile% --forward-search-line %line% %outputfile%",
-	textopdfforwardjump = "false",
+	textopdfforwardjump = "sioyek --inverse-search 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%1'\"'\"',%2,%3)\"' --reuse-window --forward-search-file %srcfile% --forward-search-line %line% %outputfile%",
+	--textopdfforwardjump = "false",
 	textopdfshorterror = 'A=%outputfile% ; LOGFILE="${A%.pdf}.log" ; rubber-info "$LOGFILE" 2>&1 | head -n 1',
 	delay = 150,
 }

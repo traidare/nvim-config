@@ -147,7 +147,6 @@
           dockerfile-language-server-nodejs
         ];
         tex = [
-          custom-texlive
           pandoc
           tex-fmt
           texlab
