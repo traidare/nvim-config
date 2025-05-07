@@ -2,12 +2,9 @@ return {
   "conform.nvim",
   for_cat = "general.core",
   cmd = { "ConformInfo" },
-  -- event = "",
-  -- ft = "",
   keys = {
     { "<leader>f", desc = "[F]ormat [F]ile" },
   },
-  -- colorscheme = "",
   after = function(_)
     local conform = require("conform")
 
@@ -17,6 +14,7 @@ return {
         cmake = { "cmake_format" }, -- FIXME
         cpp = { "clang_format" },
         go = { "gofumpt", lsp_format = "first" },
+        html = { "superhtml", lsp_format = "first" },
         javascript = { "prettierd", "prettier", stop_after_first = true },
         json = { "prettierd", "prettier", stop_after_first = true },
         lua = { "stylua" },
@@ -76,11 +74,14 @@ return {
           },
         },
       },
+
+      default_format_opts = {
+        lsp_format = "fallback",
+      },
     })
 
     vim.keymap.set({ "n", "v" }, "<leader>f", function()
       conform.format({
-        lsp_fallback = true,
         async = false,
         timeout_ms = 1000,
       })

@@ -99,6 +99,7 @@
         ];
         web = {
           HTML = [
+            superhtml
             vscode-langservers-extracted
           ];
           JS = with nodePackages; [
@@ -206,47 +207,7 @@
       };
     };
 
-    packageDefinitions = {
-      nvim-nixcats = {pkgs, ...}: {
-        settings = {
-          wrapRc = true;
-          extraName = "nvim";
-          aliases = ["nvim"];
-          configDirName = "nvim-nixcats";
-          hosts = {
-            python3.enable = true;
-          };
-        };
-
-        categories = {
-          C = true;
-          data = true;
-          debug = false;
-          extra = true;
-          general = true;
-          go = true;
-          gui = true;
-          lua = true;
-          nix = true;
-          nu = true;
-          python = true;
-          rust = false;
-          tex = true;
-          theme = true;
-          treesitter = true;
-          web = true;
-        };
-
-        extra = {
-          nixdExtras = {
-            nixpkgs = inputs.nixpkgs.outPath;
-            #nixos_options = ''(builtins.getFlake "${inputs.self.outPath}").legacyPackages.${pkgs.system}.nixosConfigurations."".options'';
-          };
-          # TODO: add yamlfmt configuration
-        };
-      };
-    };
-
+    packageDefinitions = import ./nvims.nix inputs;
     defaultPackageName = "nvim-nixcats";
   in
     forEachSystem (system: let
