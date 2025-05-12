@@ -85,7 +85,12 @@
           wl-clipboard
         ];
         general = {
-          bash = [bash-language-server];
+          bash = [
+            bash-language-server
+            shellcheck
+            shellharden
+            shfmt
+          ];
         };
         go = [
           delve

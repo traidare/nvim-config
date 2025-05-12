@@ -10,6 +10,7 @@ return {
 
     conform.setup({
       formatters_by_ft = {
+        bash = { "shfmt" },
         c = { "clang_format" },
         cmake = { "cmake_format" }, -- FIXME
         cpp = { "clang_format" },
@@ -21,6 +22,7 @@ return {
         nix = { "alejandra" },
         nu = { "nufmt" },
         python = { "ruff_format" },
+        sh = { "shfmt" },
         tex = { "tex_fmt" },
         yaml = { "yamlfmt" },
       },
@@ -56,6 +58,13 @@ return {
             -- Return the command with the style
             return { "--style=" .. style_json }
           end,
+        },
+        shfmt = {
+          append_args = {
+            "-i",
+            "2",
+            "-ci",
+          },
         },
         tex_fmt = {
           command = "tex-fmt",
