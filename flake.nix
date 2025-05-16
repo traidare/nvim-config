@@ -4,17 +4,8 @@
 
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
 
-    lze = {
-      url = "github:BirdeeHub/lze";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    lzextras = {
-      url = "github:BirdeeHub/lzextras";
-      inputs.lze.follows = "lze";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    plugins-diagflow = {
-      url = "github:dgagn/diagflow.nvim";
+    plugins-nvim-luaref = {
+      url = "github:milisims/nvim-luaref";
       flake = false;
     };
 
@@ -79,10 +70,29 @@
       };
 
       lspsAndRuntimeDeps = with pkgs; {
-        portableExtras = [
-          coreutils-full
-          nix
-          wl-clipboard
+        C = [
+          clang-tools
+          cmake
+          cmake-format
+          cmake-language-server
+          cpplint
+          valgrind
+        ];
+        data = {
+          docker = [
+            docker-compose-language-service
+            dockerfile-language-server-nodejs
+          ];
+          yaml = [
+            vscode-langservers-extracted
+            yaml-language-server
+            yamlfmt
+          ];
+        };
+        debug = [
+          nvim-dap
+          nvim-dap-ui
+          nvim-dap-virtual-text
         ];
         general = {
           bash = [
@@ -90,6 +100,9 @@
             shellcheck
             shellharden
             shfmt
+          ];
+          notes = [
+            pandoc
           ];
         };
         go = [
@@ -104,6 +117,7 @@
         ];
         web = {
           HTML = [
+            pandoc
             superhtml
             vscode-langservers-extracted
           ];
@@ -113,11 +127,6 @@
             prettier
           ];
         };
-        rust = [
-          rustup
-          llvmPackages.bintools
-          lldb
-        ];
         lua = [
           lua-language-server
           stylua
@@ -135,40 +144,32 @@
         python = [
           ruff
         ];
-        C = [
-          clang-tools
-          cmake
-          cmake-format
-          cmake-language-server
-          cpplint
-          valgrind
+        racket = [
+          racket
         ];
-        data = [
-          vscode-langservers-extracted
-          yaml-language-server
-          yamlfmt
-        ];
-        docker = [
-          docker-compose-language-service
-          dockerfile-language-server-nodejs
+        rust = [
+          rustup
+          llvmPackages.bintools
+          lldb
         ];
         tex = [
           pandoc
           tex-fmt
           texlab
         ];
-        gui = [
-          pandoc
-        ];
       };
 
       startupPlugins = with pkgs.vimPlugins; {
         general = [
           lze
-          inputs.lzextras.packages.${pkgs.system}.default
+          lzextras
+          pkgs.neovimPlugins.nvim-luaref
         ];
         theme = [no-clown-fiesta-nvim];
-        treesitter = builtins.attrValues pkgs.vimPlugins.nvim-treesitter.grammarPlugins;
+        #treesitter = builtins.attrValues pkgs.vimPlugins.nvim-treesitter.grammarPlugins;
+        neonixdev = [
+          luvit-meta
+        ];
       };
 
       optionalPlugins = with pkgs.vimPlugins; {
@@ -179,35 +180,37 @@
           ];
           cmp = [
             blink-cmp
+            blink-compat
+            cmp-cmdline
+            colorful-menu-nvim
+            luasnip
           ];
           core = [
             conform-nvim
+            diagflow-nvim
             nvim-lspconfig
-            pkgs.neovimPlugins.diagflow
             sort-nvim
+          ];
+          treesitter = [
+            nvim-treesitter-textobjects
+            nvim-treesitter.withAllGrammars
           ];
         };
         go = [
           go-nvim
           nvim-dap-go
         ];
-        gui = [
+        tex = [
           knap
         ];
         python = [
           nvim-dap-python
         ];
-        debug = [
-          nvim-dap
-          nvim-dap-ui
-          nvim-dap-virtual-text
-        ];
-        treesitter = [
-          nvim-treesitter
-          nvim-treesitter-textobjects
-        ];
-        extra = [
+        other = [
           which-key-nvim
+        ];
+        neonixdev = [
+          lazydev-nvim
         ];
       };
     };

@@ -22,6 +22,7 @@ return {
         nix = { "alejandra" },
         nu = { "nufmt" },
         python = { "ruff_format" },
+        racket = { lsp_format = "first" },
         sh = { "shfmt" },
         tex = { "tex_fmt" },
         yaml = { "yamlfmt" },
@@ -66,6 +67,12 @@ return {
             "-ci",
           },
         },
+        stylua = {
+          prepend_args = {
+            "--indent-type=spaces",
+            "--indent-width=2",
+          },
+        },
         tex_fmt = {
           command = "tex-fmt",
           args = {
@@ -74,12 +81,6 @@ return {
             "--tabsize",
             "2",
             "--nowrap",
-          },
-        },
-        stylua = {
-          prepend_args = {
-            "--indent-type=spaces",
-            "--indent-width=2",
           },
         },
       },

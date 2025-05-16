@@ -13,14 +13,15 @@ inputs: let
     C = true;
     data = true;
     debug = false;
-    extra = true;
     general = true;
     go = true;
-    gui = true;
     lua = true;
+    neonixdev = true;
     nix = true;
     nu = true;
+    other = true;
     python = true;
+    racket = true;
     rust = false;
     tex = true;
     theme = true;

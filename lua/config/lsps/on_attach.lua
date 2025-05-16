@@ -1,6 +1,4 @@
 return function(client, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
   local nmap = function(keys, func, desc)
     if desc then
       desc = "LSP: " .. desc
