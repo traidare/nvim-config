@@ -42,10 +42,9 @@ return {
             "fallback",
           },
           ["<C-e>"] = { "accept", "fallback" },
-          ["<C-y>"] = { "select_and_accept", "fallback" },
+          ["<C-y>"] = { "accept", "fallback" },
           ["<C-p>"] = { "select_prev", "fallback" },
           ["<C-n>"] = { "select_next", "fallback" },
-          ["<Esc>"] = { "hide", "fallback" },
         },
 
         cmdline = {
@@ -55,12 +54,12 @@ return {
             preset = "cmdline",
             ["<CR>"] = { "accept", "fallback" },
             ["<C-e>"] = { "accept", "fallback" },
-            ["<C-y>"] = { "select_and_accept", "fallback" },
+            ["<C-y>"] = { "accept", "fallback" },
             ["<Tab>"] = { "show", "select_next" },
             ["<S-Tab>"] = { "show", "select_prev" },
             ["<ESC>"] = {
               function(cmp)
-                if cmp.is_visible() then
+                if cmp.is_menu_visible() then
                   cmp.cancel()
                 else
                   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-c>", true, true, true), "n", true)

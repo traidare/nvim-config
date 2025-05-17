@@ -1,7 +1,7 @@
 return {
   "conform.nvim",
   for_cat = "general.core",
-  cmd = { "ConformInfo" },
+  cmd = { "ConformInfo", "Format" },
   keys = {
     { "<leader>f", desc = "[F]ormat [F]ile" },
   },
@@ -10,7 +10,7 @@ return {
 
     conform.setup({
       formatters_by_ft = {
-        bash = { "shfmt" },
+        bash = { "shfmt", "shellharden" },
         c = { "clang_format" },
         cmake = { "cmake_format" }, -- FIXME
         cpp = { "clang_format" },
@@ -23,7 +23,7 @@ return {
         nu = { "nufmt" },
         python = { "ruff_format" },
         racket = { lsp_format = "first" },
-        sh = { "shfmt" },
+        sh = { "shfmt", "shellharden" },
         tex = { "tex_fmt" },
         yaml = { "yamlfmt" },
       },
@@ -96,5 +96,17 @@ return {
         timeout_ms = 1000,
       })
     end, { desc = "[F]ormat [F]ile" })
+
+    vim.api.nvim_create_user_command("Format", function(opts)
+      local formatter = opts.args
+
+      if formatter == "" then
+        conform.format()
+      elseif formatter:lower() == "lsp" then
+        conform.format({ formatters = nil, lsp_format = "prefer" })
+      else
+        conform.format({ formatters = { formatter } })
+      end
+    end, { nargs = "?", desc = "Format buffer with specified formatter" })
   end,
 }
