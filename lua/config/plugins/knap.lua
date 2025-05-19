@@ -34,7 +34,7 @@ local gknapsettings = {
 return {
 	{
 		"knap",
-		for_cat = { cat = "gui", default = false },
+		for_cat = { cat = "tex", default = false },
 		-- cmd = { "" },
 		-- event = "",
 		on_require = { "knap" },

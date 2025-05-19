@@ -4,7 +4,7 @@ end
 
 local plugins = {
   --{ import = "config.plugins.which-key", vscode = true },
-  { import = "config.plugins.cmp" },
+  { import = "config.plugins.cmp", vscode = false },
   { import = "config.plugins.knap", vscode = false },
   { import = "config.plugins.sort", vscode = true },
   { import = "config.plugins.treesitter", vscode = true },

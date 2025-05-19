@@ -31,6 +31,7 @@ return {
     after = function(plugin)
       require("blink.cmp").setup({
         -- See :h blink-cmp-config-keymap for configuring keymaps
+        -- TODO: Make <C-p> & <C-n> use blink menu
         keymap = {
           preset = "enter",
           ["<CR>"] = {
