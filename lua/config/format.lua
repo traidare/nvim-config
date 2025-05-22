@@ -14,9 +14,11 @@ return {
         c = { "clang_format" },
         cmake = { "cmake_format" }, -- FIXME
         cpp = { "clang_format" },
+        css = { "prettierd", "prettier", stop_after_first = true },
         go = { "gofumpt", lsp_format = "first" },
         html = { "superhtml", lsp_format = "first" },
         javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascriptreact = { "prettierd", "prettier", stop_after_first = true },
         json = { "prettierd", "prettier", stop_after_first = true },
         lua = { "stylua" },
         nix = { "alejandra" },
@@ -59,6 +61,12 @@ return {
             -- Return the command with the style
             return { "--style=" .. style_json }
           end,
+        },
+        prettier = {
+          prepend_args = {
+            "--tab-width=2",
+            "--no-semi",
+          },
         },
         shfmt = {
           append_args = {
