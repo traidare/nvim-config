@@ -122,13 +122,47 @@ return {
           },
         },
 
+        sources = {
+          default = { "lsp", "path", "snippets", "buffer", "omni" },
+          providers = {
+            path = {
+              score_offset = 50,
+            },
+            lsp = {
+              score_offset = 40,
+            },
+            snippets = {
+              score_offset = 40,
+            },
+            cmp_cmdline = {
+              name = "cmp_cmdline",
+              module = "blink.compat.source",
+              score_offset = -100,
+              opts = {
+                cmp_name = "cmdline",
+              },
+            },
+          },
+        },
+
         completion = {
+          accept = {
+            auto_brackets = {
+              enabled = true,
+
+              kind_resolution = {
+                blocked_filetypes = { "tex" },
+              },
+            },
+          },
+
           list = {
             selection = {
               preselect = true,
               auto_insert = false,
             },
           },
+
           menu = {
             auto_show = false,
             draw = {
@@ -159,9 +193,11 @@ return {
               },
             },
           },
+
           documentation = {
             auto_show = true,
           },
+
           ghost_text = {
             enabled = true,
             show_with_menu = false,
@@ -170,29 +206,6 @@ return {
 
         snippets = {
           preset = "luasnip",
-        },
-
-        sources = {
-          default = { "lsp", "path", "snippets", "buffer", "omni" },
-          providers = {
-            path = {
-              score_offset = 50,
-            },
-            lsp = {
-              score_offset = 40,
-            },
-            snippets = {
-              score_offset = 40,
-            },
-            cmp_cmdline = {
-              name = "cmp_cmdline",
-              module = "blink.compat.source",
-              score_offset = -100,
-              opts = {
-                cmp_name = "cmdline",
-              },
-            },
-          },
         },
       })
     end,
