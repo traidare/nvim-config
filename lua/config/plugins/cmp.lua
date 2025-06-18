@@ -14,9 +14,19 @@ return {
   {
     "luasnip",
     for_cat = "general.cmp",
-    dep_of = { "blink.cmp" },
+    dep_of = { "blink.cmp", "luasnip-latex-snippets" },
     after = function(_)
       require("config.snippets")
+    end,
+  },
+  {
+    "luasnip-latex-snippets",
+    for_cat = "tex",
+    after = function(_)
+      require("luasnip-latex-snippets").setup({
+        use_treesitter = true,
+        allow_on_markdown = false,
+      })
     end,
   },
   {

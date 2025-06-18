@@ -36,11 +36,11 @@ set.writebackup = false -- backup file creation before overwriting
 -- set.smartindent
 
 if vim.g.vscode then
-	vim.api.nvim_create_autocmd("BufEnter", {
-		pattern = "*",
-		callback = function()
-			-- Clear all autocommands related to BufModifiedSet
-			vim.api.nvim_clear_autocmds({ event = "BufModifiedSet" })
-		end,
-	})
+  vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = "*",
+    callback = function()
+      -- Clear all autocommands related to BufModifiedSet
+      vim.api.nvim_clear_autocmds({ event = "BufModifiedSet" })
+    end,
+  })
 end

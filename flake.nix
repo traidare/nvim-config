@@ -9,6 +9,11 @@
       flake = false;
     };
 
+    plugins-luasnip-latex-snippets = {
+      url = "github:iurimateus/luasnip-latex-snippets.nvim";
+      flake = false;
+    };
+
     nix-common = {
       url = "github:traidare/nix-common";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -202,6 +207,7 @@
         ];
         tex = [
           knap
+          pkgs.neovimPlugins.luasnip-latex-snippets
         ];
         python = [
           nvim-dap-python
