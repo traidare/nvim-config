@@ -26,6 +26,7 @@ return {
         python = { "ruff_format" },
         racket = { lsp_format = "first" },
         sh = { "shfmt", "shellharden" },
+        sql = { "sqruff" },
         tex = { "tex_fmt" },
         yaml = { "yamlfmt" },
       },

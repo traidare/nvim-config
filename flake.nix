@@ -8,9 +8,12 @@
       url = "github:milisims/nvim-luaref";
       flake = false;
     };
-
     plugins-luasnip-latex-snippets = {
       url = "github:iurimateus/luasnip-latex-snippets.nvim";
+      flake = false;
+    };
+    plugins-sqls = {
+      url = "github:nanotee/sqls.nvim";
       flake = false;
     };
 
@@ -157,6 +160,10 @@
           llvmPackages.bintools
           lldb
         ];
+        sql = [
+          sqls
+          sqruff
+        ];
         tex = [
           pandoc
           tex-fmt
@@ -204,6 +211,9 @@
         go = [
           go-nvim
           nvim-dap-go
+        ];
+        sql = [
+          pkgs.neovimPlugins.sqls
         ];
         tex = [
           knap

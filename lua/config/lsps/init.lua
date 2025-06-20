@@ -256,6 +256,15 @@ return {
     lsp = {},
   },
   {
+    "sqls",
+    for_cat = "sql",
+    lsp = {
+      cmd = { "sqls", "-config", "/home/user/.config/sqls/config.yaml" }, -- TODO: pass config.yaml path directly to nixCats
+      --cmd = { "" }, -- TODO: Use `-config .sqls.yml` if `.sqls.yml` is in cwd
+      root_markers = { ".git", ".sqls.yml" },
+    },
+  },
+  {
     "texlab",
     for_cat = "tex",
     lsp = {},

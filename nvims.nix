@@ -1,7 +1,11 @@
 inputs: let
   inherit (inputs.nixCats) utils;
 
-  default_settings = { pkgs, name, ... }@misc: {
+  default_settings = {
+    pkgs,
+    name,
+    ...
+  } @ misc: {
     extraName = "nvim";
     configDirName = "nvim-nixcats";
     hosts = {
@@ -9,7 +13,7 @@ inputs: let
     };
   };
 
-  default_categories = { pkgs, ... }@misc: {
+  default_categories = {pkgs, ...} @ misc: {
     C = true;
     data = true;
     debug = false;
@@ -23,13 +27,14 @@ inputs: let
     python = true;
     racket = true;
     rust = false;
+    sql = true;
     tex = true;
     theme = true;
     treesitter = true;
     web = true;
   };
 
-  default_extra = { pkgs, ... }@misc: {
+  default_extra = {pkgs, ...} @ misc: {
     nixdExtras = {
       nixpkgs = inputs.nixpkgs.outPath;
       #nixos_options = ''(builtins.getFlake "${inputs.self.outPath}").legacyPackages.${pkgs.system}.nixosConfigurations."".options'';
