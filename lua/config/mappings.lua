@@ -1,4 +1,11 @@
+local cmd = vim.api.nvim_create_user_command
 local map = vim.keymap.set
+
+-- For typos due to shift key
+cmd("W", "w", {})
+cmd("Q", "q", {})
+cmd("Wq", "wq", {})
+cmd("WQ", "wq", {})
 
 map("n", "i", function()
   if #vim.fn.getline(".") == 0 then
@@ -18,19 +25,19 @@ map("i", "<C-,><C-l>", [[<C-o>:r !uuidgen|sed "s/.*/&/"|tr "[A-Z]" "[a-z]"<CR><C
 map("v", ".", ":normal .<CR>") -- allow the . to execute once for each line of a visual selection
 
 -- CMDLINE
-vim.keymap.set("c", "<A-v>", "<C-f>")
-vim.keymap.set("c", "<C-a>", "<Home>")
-vim.keymap.set("c", "<C-b>", "<Left>")
-vim.keymap.set("c", "<C-f>", "<Right>")
-vim.keymap.set("c", "<A-b>", "<S-Left>")
-vim.keymap.set("c", "<A-f>", "<S-Right>")
+map("c", "<A-v>", "<C-f>")
+map("c", "<C-a>", "<Home>")
+map("c", "<C-b>", "<Left>")
+map("c", "<C-f>", "<Right>")
+map("c", "<A-b>", "<S-Left>")
+map("c", "<A-f>", "<S-Right>")
 
 if vim.g.vscode then
   local vscode = require("vscode")
 
   --map('i', '<A-o>', '<Esc>o')
   --map('i', '<AS-o>', '<Esc>O')
-  --
+
   --map('n', '<C-d>', 'k') -- Move the cursor after scrolling
   --map('n', '<C-u>', 'j') -- Move the cursor after scrolling
 
@@ -39,11 +46,4 @@ if vim.g.vscode then
 
   --vim.keymap.del({ 'n', 'x' }, '<C-w><C-h>')
   --vim.keymap.del({ 'n', 'x' }, '<C-w><C-l>')
-
-  vim.keymap.set({ "n", "x" }, "<C-w><A-h>", function()
-    vscode.action("workbench.action.moveEditorToLeftGroup")
-  end)
-  vim.keymap.set({ "n", "x" }, "<C-w><A-l>", function()
-    vscode.action("workbench.action.moveEditorToRightGroup")
-  end)
 end
