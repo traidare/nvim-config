@@ -64,7 +64,6 @@ in {
       default_settings args
       // {
         wrapRc = false;
-        aliases = ["tnvim"];
       };
     categories =
       default_categories args

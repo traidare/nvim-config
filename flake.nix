@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
 
     plugins-nvim-luaref = {
@@ -15,11 +14,6 @@
     plugins-sqls = {
       url = "github:nanotee/sqls.nvim";
       flake = false;
-    };
-
-    nix-common = {
-      url = "github:traidare/nix-common";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
@@ -44,7 +38,6 @@
         # use `pkgs.neovimPlugins`, which is a set of our plugins.
         (utils.standardPluginOverlay inputs)
         # add any other flake overlays here.
-        inputs.nix-common.overlays.packages
 
         # when other people mess up their overlays by wrapping them with system,
         # you may instead call this function on their overlay.
