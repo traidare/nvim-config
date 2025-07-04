@@ -2,11 +2,8 @@ return {
     {
         "nvim-treesitter",
         for_cat = "general.treesitter",
-        -- cmd = { "" },
         event = "DeferredUIEnter",
         dep_of = { "go.nvim" }, -- { "treesj", "otter.nvim", "hlargs", "render-markdown", "neorg" },
-        -- ft = "",
-        -- keys = "",
         load = function(name)
             require("config.utils").multi_packadd({
                 name,
@@ -41,6 +38,9 @@ return {
                                 ['if'] = '@function.inner',
                                 ['ac'] = '@class.outer',
                                 ['ic'] = '@class.inner',
+
+                                ['ab'] = '@codeblock.outer',  -- around code block (includes ```)
+                                ['ib'] = '@codeblock.inner',  -- inner code block (content only)
                             },
                         },
                         move = {
