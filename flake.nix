@@ -17,11 +17,7 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: let
+  outputs = {nixpkgs, ...} @ inputs: let
     inherit (inputs.nixCats) utils;
     luaPath = "${./.}";
     forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
@@ -171,7 +167,6 @@
           pkgs.neovimPlugins.nvim-luaref
         ];
         theme = [no-clown-fiesta-nvim];
-        #treesitter = builtins.attrValues pkgs.vimPlugins.nvim-treesitter.grammarPlugins;
         neonixdev = [
           luvit-meta
         ];
