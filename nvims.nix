@@ -6,6 +6,7 @@ inputs: let
     name,
     ...
   } @ misc: {
+    wrapRc = true;
     extraName = "nvim";
     configDirName = "nvim-nixcats";
     hosts = {
@@ -46,17 +47,10 @@ in {
     settings =
       default_settings args
       // {
-        wrapRc = true;
         aliases = ["vi" "nvim"];
       };
-    categories =
-      default_categories args
-      // {
-      };
-    extra =
-      default_extra args
-      // {
-      };
+    categories = default_categories args // {};
+    extra = default_extra args // {};
   };
 
   nvim-testing = args: {
@@ -65,13 +59,18 @@ in {
       // {
         wrapRc = false;
       };
-    categories =
-      default_categories args
-      // {
-      };
-    extra =
-      default_extra args
-      // {
-      };
+    categories = default_categories args // {};
+    extra = default_extra args // {};
+  };
+
+  nvim-minimal = args: {
+    settings = default_settings args // {};
+    categories = {
+      general = true;
+      python = false;
+      theme = true;
+      treesitter = true;
+    };
+    extra = default_extra args // {};
   };
 }

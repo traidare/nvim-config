@@ -98,10 +98,10 @@
             shellharden
             shfmt
           ];
-          notes = [
-            pandoc
-          ];
         };
+        notes = [
+          pandoc
+        ];
         go = [
           delve
           go
@@ -174,10 +174,6 @@
 
       optionalPlugins = with pkgs.vimPlugins; {
         general = {
-          notes = [
-            neorg
-            render-markdown-nvim
-          ];
           cmp = [
             blink-cmp
             blink-compat
@@ -196,6 +192,10 @@
             nvim-treesitter.withAllGrammars
           ];
         };
+        notes = [
+          neorg
+          render-markdown-nvim
+        ];
         go = [
           go-nvim
           nvim-dap-go
