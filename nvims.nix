@@ -16,6 +16,7 @@ inputs: let
 
   default_categories = {pkgs, ...} @ misc: {
     C = true;
+    bash = true;
     data = true;
     debug = false;
     general = true;
@@ -63,13 +64,25 @@ in {
     extra = default_extra args // {};
   };
 
-  nvim-minimal = args: {
+  nvim-small = args: {
     settings = default_settings args // {};
     categories = {
       general = true;
-      python = false;
       theme = true;
-      treesitter = true;
+    };
+    extra = default_extra args // {};
+  };
+
+  nvim-minimal = args: {
+    settings = default_settings args // {};
+    categories = {
+      general = {
+        core = true;
+        cmp = true;
+        bash = false;
+        treesitter = false;
+      };
+      theme = true;
     };
     extra = default_extra args // {};
   };

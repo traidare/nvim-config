@@ -52,19 +52,15 @@
       settings,
       ...
     } @ packageDef: {
-      sharedLibraries = {
-        general = with pkgs; [];
-      };
+      sharedLibraries.general = with pkgs; [];
 
-      python3.libraries = {
-        python = py:
-          with py; [
-            debugpy
-            pytest
-            python-lsp-ruff
-            python-lsp-server
-          ];
-      };
+      python3.libraries.python = py:
+        with py; [
+          debugpy
+          pytest
+          python-lsp-ruff
+          python-lsp-server
+        ];
 
       lspsAndRuntimeDeps = with pkgs; {
         C = [
@@ -161,11 +157,11 @@
       };
 
       startupPlugins = with pkgs.vimPlugins; {
-        general = [
+        general.core = [
           lze
           lzextras
-          pkgs.neovimPlugins.nvim-luaref
         ];
+        lua = [pkgs.neovimPlugins.nvim-luaref];
         theme = [no-clown-fiesta-nvim];
         neonixdev = [
           luvit-meta
