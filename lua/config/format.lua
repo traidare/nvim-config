@@ -23,6 +23,7 @@ return {
         lua = { "stylua" },
         nix = { "alejandra" },
         nu = { "nufmt" },
+        php = { "php_cs_fixer" },
         python = { "ruff_format" },
         racket = { lsp_format = "first" },
         sh = { "shfmt", "shellharden" },
