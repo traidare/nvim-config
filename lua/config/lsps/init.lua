@@ -222,12 +222,12 @@ return {
   },
   {
     "jsonls",
-    for_cat = "data",
+    for_cat = "serde",
     lsp = {},
   },
   {
     "yamlls",
-    for_cat = "data",
+    for_cat = "serde",
     lsp = {
       filetypes = { "yaml", "yml" },
       settings = {
@@ -244,6 +244,11 @@ return {
         },
       },
     },
+  },
+  {
+    "gitlab_ci_ls",
+    for_cat = "serde",
+    lsp = {},
   },
   {
     "docker_compose_language_service",

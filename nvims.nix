@@ -17,8 +17,8 @@ inputs: let
   default_categories = {pkgs, ...} @ misc: {
     C = true;
     bash = true;
-    data = true;
     debug = false;
+    docker = true;
     general = true;
     go = true;
     lua = true;
@@ -29,6 +29,7 @@ inputs: let
     python = true;
     racket = true;
     rust = false;
+    serde = true;
     sql = true;
     tex = true;
     theme = true;

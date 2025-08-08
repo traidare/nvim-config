@@ -71,17 +71,17 @@
           cpplint
           valgrind
         ];
-        data = {
-          docker = [
-            docker-compose-language-service
-            dockerfile-language-server-nodejs
-          ];
-          yaml = [
-            vscode-langservers-extracted
-            yaml-language-server
-            yamlfmt
-          ];
-        };
+        container = [
+          docker-compose-language-service
+          dockerfile-language-server-nodejs
+        ];
+        # serde = "serialization-deserializtion"
+        serde = [
+          gitlab-ci-ls
+          vscode-langservers-extracted
+          yaml-language-server
+          yamlfmt
+        ];
         debug = [
           nvim-dap
           nvim-dap-ui
