@@ -157,11 +157,13 @@ return {
                 "RUF", -- ruff's custom rules
               },
               ignore = {
+                "ANN001", --  Missing type annotation for function
                 "ANN002", -- Missing type annotation for *args
                 "ANN003", -- Missing type annotation for **kwargs
                 "ANN101", -- Missing type annotation for self in method
                 "ANN102", -- Missing type annotation for cls in classmethod
                 "ANN201", -- Missing type annotation for public function
+                "ANN202", -- Missing return type annotation for private function
                 "ANN204", -- Missing return type annotation for special method
                 "B904", -- Exception raised within try-except should use raise ... from exc
                 "E501", -- Line too long
