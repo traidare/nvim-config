@@ -15,7 +15,7 @@ return {
         cmake = { "cmake_format" }, -- FIXME
         cpp = { "clang_format" },
         css = { "prettierd", "prettier", stop_after_first = true },
-        go = { "gofumpt", lsp_format = "first" },
+        go = { "goimports", "gofumpt" },
         html = { "superhtml", lsp_format = "first" },
         javascript = { "prettierd", "prettier", stop_after_first = true },
         javascriptreact = { "prettierd", "prettier", stop_after_first = true },
