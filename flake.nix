@@ -75,9 +75,10 @@
           docker-compose-language-service
           dockerfile-language-server-nodejs
         ];
-        # serde = "serialization-deserializtion"
+        # "serde" = "serialization-deserializtion"
         serde = [
           gitlab-ci-ls
+          libxml2
           vscode-langservers-extracted
           yaml-language-server
           yamlfmt

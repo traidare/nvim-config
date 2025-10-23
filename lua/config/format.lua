@@ -29,6 +29,7 @@ return {
         sh = { "shfmt", "shellharden" },
         sql = { "sqruff" },
         tex = { "tex_fmt" },
+        xml = { "xmllint" },
         yaml = { "yamlfmt" },
       },
 
