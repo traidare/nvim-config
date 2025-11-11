@@ -1,39 +1,40 @@
 local set = vim.opt
 
+-- Disable mouse
 set.mouse = ""
 
-set.expandtab = true -- replace tabs with spaces
+-- Tab settings
+set.expandtab = true
 set.shiftwidth = 4
 set.tabstop = 4
 
+-- Search settings
 set.incsearch = true
 set.hlsearch = true
 set.ignorecase = true
 set.smartcase = true
 
+-- Wildmenu settings
 set.wildmode = "list:longest,full"
 set.wildignorecase = true
 
+-- Line numbers
 set.number = true
 set.relativenumber = true
 
-set.linebreak = true -- break after last non-word character, instead of last character
+-- UI settings
+set.linebreak = true
 set.cursorline = true
 set.cursorlineopt = "both"
-
 set.termguicolors = true
---set.showmode = false
 set.splitbelow = true
 set.splitright = true
 set.scrolloff = 5
-set.foldenable = false -- no automatic folding - all folds are open
+set.foldenable = false
 
--- more risky, but cleaner
+-- Disable swap and backup files
 set.swapfile = false
-set.writebackup = false -- backup file creation before overwriting
-
--- set.autoindent
--- set.smartindent
+set.writebackup = false
 
 if vim.g.vscode then
   vim.api.nvim_create_autocmd("BufEnter", {

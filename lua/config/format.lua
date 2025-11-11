@@ -1,107 +1,77 @@
+-- Formatters by filetype
+local formatters_by_ft = {
+  bash = { "shfmt", "shellharden" },
+  c = { "clang_format" },
+  cmake = { "cmake_format" },
+  cpp = { "clang_format" },
+  css = { "prettierd", "prettier", stop_after_first = true },
+  go = { "goimports", "gofumpt" },
+  html = { "superhtml", lsp_format = "first" },
+  javascript = { "prettierd", "prettier", stop_after_first = true },
+  javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+  json = { "prettierd", "prettier", stop_after_first = true },
+  lua = { "stylua" },
+  nix = { "alejandra" },
+  nu = { "nufmt" },
+  php = { "php_cs_fixer" },
+  python = { "ruff_format" },
+  racket = { lsp_format = "first" },
+  sh = { "shfmt", "shellharden" },
+  sql = { "sqruff" },
+  tex = { "tex_fmt" },
+  xml = { "xmllint" },
+  yaml = { "yamlfmt" },
+}
+
+local formatters = {
+  alejandra = { prepend_args = { "--quiet" } },
+  clang_format = {
+    prepend_args = function()
+      return {
+        "--style=" .. vim.fn.json_encode({
+          BasedOnStyle = "Google",
+          AlignAfterOpenBracket = true,
+          AlignArrayOfStructures = "Left",
+          AlignConsecutiveAssignments = "AcrossComments",
+          AlignConsecutiveDeclarations = "AcrossComments",
+          AlignConsecutiveMacros = "AcrossComments",
+          AlignEscapedNewlines = "LeftWithLastLine",
+          AlignOperands = true,
+          AlignTrailingComments = { Kind = "Always", OverEmptyLines = 2 },
+          BreakConstructorInitializers = "AfterColon",
+          ColumnLimit = 0,
+          IndentWidth = 4,
+          SpacesInParentheses = false,
+          SpacesInSquareBrackets = false,
+          UseTab = "Never",
+        }),
+      }
+    end,
+  },
+  prettier = { prepend_args = { "--tab-width=2", "--no-semi" } },
+  shfmt = { append_args = { "-i", "2", "-ci" } },
+  stylua = { prepend_args = { "--indent-type=spaces", "--indent-width=2" } },
+  tex_fmt = {
+    command = "tex-fmt",
+    args = { "--quiet", "--stdin", "--tabsize", "2", "--nowrap" },
+  },
+}
+
 return {
   "conform.nvim",
   for_cat = "general.core",
   cmd = { "ConformInfo", "Format" },
-  keys = {
-    { "<leader>f", desc = "[F]ormat [F]ile" },
-  },
+  keys = { { "<leader>f", desc = "[F]ormat [F]ile" } },
   after = function(_)
     local conform = require("conform")
 
     conform.setup({
-      formatters_by_ft = {
-        bash = { "shfmt", "shellharden" },
-        c = { "clang_format" },
-        cmake = { "cmake_format" },
-        cpp = { "clang_format" },
-        css = { "prettierd", "prettier", stop_after_first = true },
-        go = { "goimports", "gofumpt" },
-        html = { "superhtml", lsp_format = "first" },
-        javascript = { "prettierd", "prettier", stop_after_first = true },
-        javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-        json = { "prettierd", "prettier", stop_after_first = true },
-        lua = { "stylua" },
-        nix = { "alejandra" },
-        nu = { "nufmt" },
-        php = { "php_cs_fixer" },
-        python = { "ruff_format" },
-        racket = { lsp_format = "first" },
-        sh = { "shfmt", "shellharden" },
-        sql = { "sqruff" },
-        tex = { "tex_fmt" },
-        xml = { "xmllint" },
-        yaml = { "yamlfmt" },
-      },
-
-      formatters = {
-        alejandra = {
-          prepend_args = { "--quiet" },
-        },
-        clang_format = {
-          prepend_args = function()
-            local style = {
-              BasedOnStyle = "Google",
-              ---
-              AlignAfterOpenBracket = true,
-              AlignArrayOfStructures = "Left",
-              AlignConsecutiveAssignments = "AcrossComments",
-              AlignConsecutiveDeclarations = "AcrossComments",
-              AlignConsecutiveMacros = "AcrossComments",
-              AlignEscapedNewlines = "LeftWithLastLine",
-              AlignOperands = true,
-              AlignTrailingComments = { Kind = "Always", OverEmptyLines = 2 },
-              BreakConstructorInitializers = "AfterColon",
-              ColumnLimit = 0,
-              IndentWidth = 4,
-              SpacesInParentheses = false,
-              SpacesInSquareBrackets = false,
-              UseTab = "Never",
-            }
-
-            -- Convert the style table to a JSON string
-            local style_json = vim.fn.json_encode(style)
-
-            -- Return the command with the style
-            return { "--style=" .. style_json }
-          end,
-        },
-        prettier = {
-          prepend_args = {
-            "--tab-width=2",
-            "--no-semi",
-          },
-        },
-        shfmt = {
-          append_args = {
-            "-i",
-            "2",
-            "-ci",
-          },
-        },
-        stylua = {
-          prepend_args = {
-            "--indent-type=spaces",
-            "--indent-width=2",
-          },
-        },
-        tex_fmt = {
-          command = "tex-fmt",
-          args = {
-            "--quiet",
-            "--stdin",
-            "--tabsize",
-            "2",
-            "--nowrap",
-          },
-        },
-      },
-
-      default_format_opts = {
-        lsp_format = "fallback",
-      },
+      formatters_by_ft = formatters_by_ft,
+      formatters = formatters,
+      default_format_opts = { lsp_format = "fallback" },
     })
 
-    -- Workaround due to formatting files within VSCode removes EOF newline
+    -- VSCode workaround: preserve EOF newline when formatting
     local function format_preserve_eof_newline(format_opts)
       if not vim.g.vscode then
         return conform.format(format_opts)
@@ -121,21 +91,16 @@ return {
       end
     end
 
+    -- Keymap
     vim.keymap.set({ "n", "v" }, "<leader>f", function()
       format_preserve_eof_newline({ async = false, timeout_ms = 1000 })
     end, { desc = "[F]ormat [F]ile" })
 
+    -- Command
     vim.api.nvim_create_user_command("Format", function(opts)
-      local formatter = opts.args
-      local format_opts
-
-      if formatter == "" then
-        format_opts = {}
-      elseif formatter:lower() == "lsp" then
-        format_opts = { formatters = nil, lsp_format = "prefer" }
-      else
-        format_opts = { formatters = { formatter } }
-      end
+      local format_opts = opts.args == "" and {}
+        or opts.args:lower() == "lsp" and { formatters = nil, lsp_format = "prefer" }
+        or { formatters = { opts.args } }
 
       format_preserve_eof_newline(format_opts)
     end, { nargs = "?", desc = "Format buffer with specified formatter" })

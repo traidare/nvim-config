@@ -1,30 +1,32 @@
-local cmd = vim.api.nvim_create_user_command
 local map = vim.keymap.set
 
--- For typos due to shift key
-cmd("W", "w", {})
-cmd("Q", "q", {})
-cmd("Wq", "wq", {})
-cmd("WQ", "wq", {})
+-- Fix common typos
+for _, cmd_name in ipairs({ "W", "Q", "Wq", "WQ" }) do
+  vim.api.nvim_create_user_command(cmd_name, function()
+    vim.cmd(cmd_name:lower())
+  end, {})
+end
 
+-- Properly indent on empty line in insert mode
 map("n", "i", function()
-  if #vim.fn.getline(".") == 0 then
-    return [["_cc]]
-  else
-    return "i"
-  end
-end, { expr = true, desc = "Properly indent on empty line when using insert" })
+  return #vim.fn.getline(".") == 0 and [["_cc]] or "i"
+end, { expr = true, desc = "Properly indent on empty line" })
 
+-- Toggle relative line numbers
 map("n", "<leader>n", ":set norelativenumber!<CR>")
+
+-- System clipboard operations
 map("n", "<leader>y", '"+y')
 map("n", "<leader>d", '"+d')
 map("n", "<leader>p", '"+p')
 
-map("i", "<C-,><C-l>", [[<C-o>:r !uuidgen|sed "s/.*/&/"|tr "[A-Z]" "[a-z]"<CR><C-o>k<C-o>J<C-o>x<C-o>$]]) -- insert random generated UUID - https://gist.github.com/goude/b44b9d3938d3d30d8873f34fe2f92057 / https://www.grailbox.com/2021/07/insert-uuids-in-vim-neovim/ -- also probably doable with '/normal' instead of '<C-o>'
+-- Insert lowercase UUID
+map("i", "<C-,><C-l>", [[<C-o>:r !uuidgen|sed "s/.*/&/"|tr "[A-Z]" "[a-z]"<CR><C-o>k<C-o>J<C-o>x<C-o>$]])
 
-map("v", ".", ":normal .<CR>") -- allow the . to execute once for each line of a visual selection
+-- Execute . command for each line in visual selection
+map("v", ".", ":normal .<CR>")
 
--- CMDLINE
+-- Command-line navigation
 map("c", "<A-v>", "<C-f>")
 map("c", "<C-a>", "<Home>")
 map("c", "<C-b>", "<Left>")
@@ -32,18 +34,7 @@ map("c", "<C-f>", "<Right>")
 map("c", "<A-b>", "<S-Left>")
 map("c", "<A-f>", "<S-Right>")
 
+-- VSCode-specific setup
 if vim.g.vscode then
-  local vscode = require("vscode")
-
-  --map('i', '<A-o>', '<Esc>o')
-  --map('i', '<AS-o>', '<Esc>O')
-
-  --map('n', '<C-d>', 'k') -- Move the cursor after scrolling
-  --map('n', '<C-u>', 'j') -- Move the cursor after scrolling
-
-  -- Fix https://github.com/vscode-neovim/vscode-neovim/discussions/2202
-  -- defined here https://github.com/vscode-neovim/vscode-neovim/blob/master/runtime/vscode/overrides/vscode-window-commands.vim
-
-  --vim.keymap.del({ 'n', 'x' }, '<C-w><C-h>')
-  --vim.keymap.del({ 'n', 'x' }, '<C-w><C-l>')
+  require("vscode")
 end

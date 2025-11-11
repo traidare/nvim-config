@@ -1,80 +1,57 @@
 return {
-    {
-        "nvim-treesitter",
-        for_cat = "general.treesitter",
-        event = "DeferredUIEnter",
-        dep_of = { "go.nvim" }, -- { "treesj", "otter.nvim", "hlargs", "render-markdown", "neorg" },
-        load = function(name)
-            require("config.utils").multi_packadd({
-                name,
-                "nvim-treesitter-textobjects",
-            })
-        end,
-        after = function(_)
-            vim.defer_fn(function()
-                require('nvim-treesitter.configs').setup {
-                    highlight = {
-                        enable = true,
-                    },
-                    indent = { enable = false },
-                    incremental_selection = {
-                        enable = true,
-                        keymaps = {
-                            init_selection = '<M-t>',
-                            node_incremental = '<M-t>',
-                            scope_incremental = '<M-T>',
-                            node_decremental = '<M-r>',
-                        },
-                    },
-                    textobjects = {
-                        select = {
-                            enable = true,
-                            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-                            keymaps = {
-                                -- You can use the capture groups defined in textobjects.scm
-                                ['aa'] = '@parameter.outer',
-                                ['ia'] = '@parameter.inner',
-                                ['af'] = '@function.outer',
-                                ['if'] = '@function.inner',
-                                ['ac'] = '@class.outer',
-                                ['ic'] = '@class.inner',
-
-                                ['ab'] = '@codeblock.outer',  -- around code block (includes ```)
-                                ['ib'] = '@codeblock.inner',  -- inner code block (content only)
-                            },
-                        },
-                        move = {
-                            enable = true,
-                            set_jumps = true, -- whether to set jumps in the jumplist
-                            goto_next_start = {
-                                [']m'] = '@function.outer',
-                                [']]'] = '@class.outer',
-                            },
-                            goto_next_end = {
-                                [']M'] = '@function.outer',
-                                [']['] = '@class.outer',
-                            },
-                            goto_previous_start = {
-                                ['[m'] = '@function.outer',
-                                ['[['] = '@class.outer',
-                            },
-                            goto_previous_end = {
-                                ['[M'] = '@function.outer',
-                                ['[]'] = '@class.outer',
-                            },
-                        },
-                        swap = {
-                            enable = true,
-                            swap_next = {
-                                ['<leader>a'] = '@parameter.inner',
-                            },
-                            swap_previous = {
-                                ['<leader>A'] = '@parameter.inner',
-                            },
-                        },
-                    },
-                }
-            end, 0)
-        end,
-    },
+  {
+    "nvim-treesitter",
+    for_cat = "general.treesitter",
+    event = "DeferredUIEnter",
+    dep_of = { "go.nvim" },
+    load = function(name)
+      require("config.utils").multi_packadd({ name, "nvim-treesitter-textobjects" })
+    end,
+    after = function(_)
+      vim.defer_fn(function()
+        require("nvim-treesitter.configs").setup({
+          highlight = { enable = true },
+          indent = { enable = false },
+          incremental_selection = {
+            enable = true,
+            keymaps = {
+              init_selection = "<M-t>",
+              node_incremental = "<M-t>",
+              scope_incremental = "<M-T>",
+              node_decremental = "<M-r>",
+            },
+          },
+          textobjects = {
+            select = {
+              enable = true,
+              lookahead = true,
+              keymaps = {
+                ["aa"] = "@parameter.outer",
+                ["ia"] = "@parameter.inner",
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner",
+                ["ab"] = "@codeblock.outer",
+                ["ib"] = "@codeblock.inner",
+              },
+            },
+            move = {
+              enable = true,
+              set_jumps = true,
+              goto_next_start = { ["]m"] = "@function.outer", ["]]"] = "@class.outer" },
+              goto_next_end = { ["]M"] = "@function.outer", ["]["] = "@class.outer" },
+              goto_previous_start = { ["[m"] = "@function.outer", ["[["] = "@class.outer" },
+              goto_previous_end = { ["[M"] = "@function.outer", ["[]"] = "@class.outer" },
+            },
+            swap = {
+              enable = true,
+              swap_next = { ["<leader>a"] = "@parameter.inner" },
+              swap_previous = { ["<leader>A"] = "@parameter.inner" },
+            },
+          },
+        })
+      end, 0)
+    end,
+  },
 }
