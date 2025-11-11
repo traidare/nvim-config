@@ -12,7 +12,7 @@ return {
       formatters_by_ft = {
         bash = { "shfmt", "shellharden" },
         c = { "clang_format" },
-        cmake = { "cmake_format" }, -- FIXME
+        cmake = { "cmake_format" },
         cpp = { "clang_format" },
         css = { "prettierd", "prettier", stop_after_first = true },
         go = { "goimports", "gofumpt" },
@@ -101,23 +101,43 @@ return {
       },
     })
 
+    -- Workaround due to formatting files within VSCode removes EOF newline
+    local function format_preserve_eof_newline(format_opts)
+      if not vim.g.vscode then
+        return conform.format(format_opts)
+      end
+
+      local buf = vim.api.nvim_get_current_buf()
+      local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+      local had_eof_newline = lines[#lines] == ""
+
+      conform.format(format_opts)
+
+      if had_eof_newline then
+        lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+        if lines[#lines] ~= "" then
+          vim.api.nvim_buf_set_lines(buf, -1, -1, false, { "" })
+        end
+      end
+    end
+
     vim.keymap.set({ "n", "v" }, "<leader>f", function()
-      conform.format({
-        async = false,
-        timeout_ms = 1000,
-      })
+      format_preserve_eof_newline({ async = false, timeout_ms = 1000 })
     end, { desc = "[F]ormat [F]ile" })
 
     vim.api.nvim_create_user_command("Format", function(opts)
       local formatter = opts.args
+      local format_opts
 
       if formatter == "" then
-        conform.format()
+        format_opts = {}
       elseif formatter:lower() == "lsp" then
-        conform.format({ formatters = nil, lsp_format = "prefer" })
+        format_opts = { formatters = nil, lsp_format = "prefer" }
       else
-        conform.format({ formatters = { formatter } })
+        format_opts = { formatters = { formatter } }
       end
+
+      format_preserve_eof_newline(format_opts)
     end, { nargs = "?", desc = "Format buffer with specified formatter" })
   end,
 }

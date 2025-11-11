@@ -42,7 +42,6 @@ inputs: let
       nixpkgs = inputs.nixpkgs.outPath;
       #nixos_options = ''(builtins.getFlake "${inputs.self.outPath}").legacyPackages.${pkgs.system}.nixosConfigurations."".options'';
     };
-    # TODO: add yamlfmt configuration
   };
 in {
   nvim-nixcats = args: {
