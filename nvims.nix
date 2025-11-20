@@ -46,26 +46,20 @@ inputs: let
 in {
   nvim-nixcats = args: {
     settings =
-      default_settings args
-      // {
-        aliases = ["vi" "nvim"];
-      };
+      default_settings args // {aliases = ["vi" "nvim"];};
     categories = default_categories args // {};
     extra = default_extra args // {};
   };
 
   nvim-testing = args: {
     settings =
-      default_settings args
-      // {
-        wrapRc = false;
-      };
+      default_settings args // {wrapRc = false;};
     categories = default_categories args // {};
     extra = default_extra args // {};
   };
 
   nvim-small = args: {
-    settings = default_settings args // {};
+    settings = default_settings args // {aliases = ["vi" "nvim"];};
     categories = {
       general = true;
       theme = true;
@@ -74,7 +68,7 @@ in {
   };
 
   nvim-minimal = args: {
-    settings = default_settings args // {};
+    settings = default_settings args // {aliases = ["vi" "nvim"];};
     categories = {
       general = {
         core = true;
