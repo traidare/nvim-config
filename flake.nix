@@ -142,9 +142,8 @@
           racket
         ];
         rust = [
-          rustup
-          llvmPackages.bintools
-          lldb
+          rust-analyzer
+          rustfmt
         ];
         sql = [
           sqls

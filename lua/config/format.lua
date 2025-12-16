@@ -16,6 +16,7 @@ local formatters_by_ft = {
   php = { "php_cs_fixer" },
   python = { "ruff_format" },
   racket = { lsp_format = "first" },
+  rust = { "rustfmt" },
   sh = { "shfmt", "shellharden" },
   sql = { "sqruff" },
   tex = { "tex_fmt" },

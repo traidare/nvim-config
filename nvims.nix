@@ -28,7 +28,7 @@ inputs: let
     other = true;
     python = true;
     racket = true;
-    rust = false;
+    rust = true;
     serde = true;
     sql = true;
     tex = true;
