@@ -1,7 +1,7 @@
 return {
   {
     "sort.nvim",
-    for_cat = "general.core",
+    for_cat = "core",
     cmd = { "Sort" },
     after = function()
       require("sort").setup({

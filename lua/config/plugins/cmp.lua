@@ -2,18 +2,18 @@ local load_w_after = require("lzextras").loaders.with_after
 return {
   {
     "cmp-cmdline",
-    for_cat = "general.cmp",
+    for_cat = "cmp",
     on_plugin = { "blink.cmp" },
     load = load_w_after,
   },
   {
     "blink.compat",
-    for_cat = "general.cmp",
+    for_cat = "cmp",
     dep_of = { "cmp-cmdline" },
   },
   {
     "luasnip",
-    for_cat = "general.cmp",
+    for_cat = "cmp",
     dep_of = { "blink.cmp", "luasnip-latex-snippets" },
     after = function(_)
       require("config.snippets")
@@ -31,12 +31,12 @@ return {
   },
   {
     "colorful-menu.nvim",
-    for_cat = "general.cmp",
+    for_cat = "cmp",
     on_plugin = { "blink.cmp" },
   },
   {
     "blink.cmp",
-    for_cat = "general.cmp",
+    for_cat = "cmp",
     event = "DeferredUIEnter",
     after = function(plugin)
       require("blink.cmp").setup({

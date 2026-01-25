@@ -1,10 +1,10 @@
 return {
-  { "ts_ls", for_cat = "web.JS", lsp = {} },
-  { "cssls", for_cat = "web.HTML", lsp = {} },
-  { "eslint", for_cat = "web.HTML", lsp = {} },
+  { "ts_ls", for_cat = "web", lsp = {} },
+  { "cssls", for_cat = "web", lsp = {} },
+  { "eslint", for_cat = "web", lsp = {} },
   {
     "html",
-    for_cat = "web.HTML",
+    for_cat = "web",
     lsp = {
       filetypes = { "html", "twig", "hbs", "templ" },
       settings = {

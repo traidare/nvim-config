@@ -60,7 +60,7 @@ local formatters = {
 
 return {
   "conform.nvim",
-  for_cat = "general.core",
+  for_cat = "core",
   cmd = { "ConformInfo", "Format" },
   keys = { { "<leader>f", desc = "[F]ormat [F]ile" } },
   after = function(_)

@@ -1,6 +1,5 @@
 local servers = {}
-local servers_dir = require("nixCatsUtils").isNixCats and nixCats.configDir .. "/lua/config/lsps/servers"
-  or vim.fn.stdpath("config") .. "/lua/config/lsps/servers"
+local servers_dir = nix.configDir() .. "/lua/config/lsps/servers"
 
 for name, type in vim.fs.dir(servers_dir) do
   if name ~= "init.lua" and type == "file" and name:match("%.lua$") then

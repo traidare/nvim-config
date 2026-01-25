@@ -1,7 +1,7 @@
 return {
   {
     "lua_ls",
-    enabled = nixCats("lua") or nixCats("neonixdev"),
+    enabled = nix.cat("lua") or nix.cat("neonixdev"),
     lsp = {
       settings = {
         Lua = {
@@ -9,7 +9,7 @@ return {
           formatters = { ignoreComments = true },
           signatureHelp = { enabled = true },
           diagnostics = {
-            globals = { "nixCats", "vim", "make_test" },
+            globals = { "nixInfo", "vim", "make_test" },
             disable = { "missing-fields" },
           },
           workspace = { checkThirdParty = false, library = {} },
@@ -29,9 +29,8 @@ return {
         library = {
           {
             words = { "uv", "vim%.uv", "vim%.loop" },
-            path = (nixCats.pawsible({ "allPlugins", "start", "luvit-meta" }) or "luvit-meta") .. "/library",
+            path = (nix.pluginPath("luvit-meta") or "luvit-meta") .. "/library",
           },
-          { words = { "nixCats" }, path = (nixCats.nixCatsPath or "") .. "/lua" },
         },
       })
     end,

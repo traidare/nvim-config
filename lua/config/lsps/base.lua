@@ -1,7 +1,7 @@
 return {
   {
     "nvim-lspconfig",
-    for_cat = "general.core",
+    for_cat = "core",
     on_require = { "lspconfig" },
     lsp = function(plugin)
       vim.lsp.config(plugin.name, plugin.lsp or {})
@@ -15,7 +15,7 @@ return {
   },
   {
     "diagflow.nvim",
-    for_cat = "general.core",
+    for_cat = "core",
     event = "LspAttach",
     on_require = { "diagflow" },
     after = function()

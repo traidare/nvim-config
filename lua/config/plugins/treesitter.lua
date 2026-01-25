@@ -83,14 +83,14 @@ end
 return {
   {
     "nvim-treesitter",
-    for_cat = "general.treesitter",
+    for_cat = "treesitter",
     lazy = false,
     dep_of = { "go.nvim" },
     after = setup_treesitter,
   },
   {
     "nvim-treesitter-textobjects",
-    for_cat = "general.treesitter",
+    for_cat = "treesitter",
     lazy = false,
     before = function()
       -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects/tree/main?tab=readme-ov-file#using-a-package-manager
