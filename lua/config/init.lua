@@ -21,5 +21,5 @@ require("lze").load(vim.tbl_filter(function(module)
   return not vim.g.vscode or module.vscode
 end, modules))
 
-require("config.options")
+require("config.settings")
 require("config.mappings")

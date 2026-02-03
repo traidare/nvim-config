@@ -36,6 +36,9 @@ set.foldenable = false
 set.swapfile = false
 set.writebackup = false
 
+-- SQL completion settings
+vim.g.omni_sql_default_compl_type = "syntax"
+
 if vim.g.vscode then
   vim.api.nvim_create_autocmd("BufEnter", {
     pattern = "*",

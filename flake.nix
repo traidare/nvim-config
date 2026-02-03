@@ -19,10 +19,6 @@
       url = "github:iurimateus/luasnip-latex-snippets.nvim";
       flake = false;
     };
-    plugins-sqls = {
-      url = "github:nanotee/sqls.nvim";
-      flake = false;
-    };
   };
 
   outputs = {self, ...} @ inputs:

@@ -263,9 +263,8 @@ inputs: {
 
   config.specs.sql = lib.mkIf (config.settings.cats.sql or true) {
     lazy = true;
-    data = [config.nvim-lib.neovimPlugins.sqls];
+    data = null;
     postpkgs = with pkgs; [
-      sqls
       sqruff
     ];
   };
