@@ -72,38 +72,38 @@ return {
       default_format_opts = { lsp_format = "fallback" },
     })
 
-    -- VSCode workaround: preserve EOF newline when formatting
-    local function format_preserve_eof_newline(format_opts)
-      if not vim.g.vscode then
-        return conform.format(format_opts)
-      end
-
-      local buf = vim.api.nvim_get_current_buf()
-      local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-      local had_eof_newline = lines[#lines] == ""
-
-      conform.format(format_opts)
-
-      if had_eof_newline then
-        lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-        if lines[#lines] ~= "" then
-          vim.api.nvim_buf_set_lines(buf, -1, -1, false, { "" })
-        end
-      end
+    local function vscode_format()
+      require("vscode").action("runCommands", {
+        args = {
+          commands = {
+            "editor.action.organizeImports",
+            "editor.action.formatDocument",
+          },
+        },
+      })
     end
 
-    -- Keymap
+    -- Keymap: use VSCode's native formatter in VSCode, conform otherwise
     vim.keymap.set({ "n", "v" }, "<leader>f", function()
-      format_preserve_eof_newline({ async = false, timeout_ms = 1000 })
+      if vim.g.vscode then
+        vscode_format()
+      else
+        conform.format({ async = false, timeout_ms = 1000 })
+      end
     end, { desc = "[F]ormat [F]ile" })
 
     -- Command
     vim.api.nvim_create_user_command("Format", function(opts)
-      local format_opts = opts.args == "" and {}
-        or opts.args:lower() == "lsp" and { formatters = nil, lsp_format = "prefer" }
-        or { formatters = { opts.args } }
+      if vim.g.vscode then
+        vscode_format()
+        return
+      end
 
-      format_preserve_eof_newline(format_opts)
+      conform.format(
+        opts.args == "" and {}
+          or opts.args:lower() == "lsp" and { formatters = nil, lsp_format = "prefer" }
+          or { formatters = { opts.args } }
+      )
     end, { nargs = "?", desc = "Format buffer with specified formatter" })
   end,
 }
