@@ -237,15 +237,13 @@ inputs: {
     data = null;
     postpkgs = with pkgs;
       [
-        pandoc
-        superhtml
-        vscode-langservers-extracted
-      ]
-      ++ (with nodePackages; [
-        typescript-language-server
         eslint
+        pandoc
         prettier
-      ]);
+        superhtml
+        typescript-language-server
+        vscode-langservers-extracted
+      ];
   };
 
   config.specs.tex = lib.mkIf (config.settings.cats.tex or true) {
