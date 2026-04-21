@@ -235,15 +235,14 @@ inputs: {
 
   config.specs.web = lib.mkIf (config.settings.cats.web or true) {
     data = null;
-    postpkgs = with pkgs;
-      [
-        eslint
-        pandoc
-        prettier
-        superhtml
-        typescript-language-server
-        vscode-langservers-extracted
-      ];
+    postpkgs = with pkgs; [
+      eslint
+      pandoc
+      prettier
+      superhtml
+      typescript-language-server
+      vscode-langservers-extracted
+    ];
   };
 
   config.specs.tex = lib.mkIf (config.settings.cats.tex or true) {
@@ -331,8 +330,6 @@ inputs: {
     postpkgs = with pkgs; [
       clang-tools
       cmake
-      cmake-format
-      cmake-language-server
       cpplint
       valgrind
     ];

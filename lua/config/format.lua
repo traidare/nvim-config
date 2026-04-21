@@ -2,7 +2,6 @@
 local formatters_by_ft = {
   bash = { "shfmt", "shellharden" },
   c = { "clang_format" },
-  cmake = { "cmake_format" },
   cpp = { "clang_format" },
   css = { "prettierd", "prettier", stop_after_first = true },
   go = { "goimports", "gofumpt" },
