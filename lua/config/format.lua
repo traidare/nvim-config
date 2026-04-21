@@ -41,6 +41,7 @@ local formatters = {
           BreakConstructorInitializers = "AfterColon",
           ColumnLimit = 0,
           IndentWidth = 4,
+          InsertNewlineAtEOF = true,
           SpacesInParentheses = false,
           SpacesInSquareBrackets = false,
           UseTab = "Never",
