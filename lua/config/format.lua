@@ -19,6 +19,8 @@ local formatters_by_ft = {
   sh = { "shfmt", "shellharden" },
   sql = { "sqruff" },
   tex = { "tex_fmt" },
+  typescript = { "prettierd", "prettier", stop_after_first = true },
+  typescriptreact = { "prettierd", "prettier", stop_after_first = true },
   xml = { "xmllint" },
   yaml = { "yamlfmt" },
 }
@@ -49,7 +51,10 @@ local formatters = {
       }
     end,
   },
-  prettier = { prepend_args = { "--tab-width=2", "--no-semi" } },
+  prettier = { prepend_args = {
+    "--tab-width=2",
+    "--no-semi",
+  } },
   shfmt = { append_args = { "-i", "2", "-ci" } },
   stylua = { prepend_args = { "--indent-type=spaces", "--indent-width=2" } },
   tex_fmt = {
