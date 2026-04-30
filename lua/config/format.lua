@@ -5,7 +5,7 @@ local formatters_by_ft = {
   cpp = { "clang_format" },
   css = { "prettierd", "prettier", stop_after_first = true },
   go = { "goimports", "gofumpt" },
-  html = { "superhtml", lsp_format = "first" },
+  html = { "superhtml" },
   javascript = { "prettierd", "prettier", stop_after_first = true },
   javascriptreact = { "prettierd", "prettier", stop_after_first = true },
   json = { "prettierd", "prettier", stop_after_first = true },
