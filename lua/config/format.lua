@@ -6,6 +6,7 @@ local formatters_by_ft = {
   css = { "prettierd", "prettier", stop_after_first = true },
   go = { "goimports", "gofumpt" },
   html = { "superhtml" },
+  java = { "google-java-format" },
   javascript = { "prettierd", "prettier", stop_after_first = true },
   javascriptreact = { "prettierd", "prettier", stop_after_first = true },
   json = { "prettierd", "prettier", stop_after_first = true },
