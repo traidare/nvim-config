@@ -52,12 +52,7 @@ local formatters = {
       }
     end,
   },
-  prettier = { prepend_args = {
-    "--tab-width=2",
-    "--no-semi",
-  } },
   shfmt = { append_args = { "-i", "2", "-ci" } },
-  stylua = { prepend_args = { "--indent-type=spaces", "--indent-width=2" } },
   tex_fmt = {
     command = "tex-fmt",
     args = { "--quiet", "--stdin", "--tabsize", "2", "--nowrap" },
