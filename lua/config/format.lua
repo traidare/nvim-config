@@ -12,7 +12,7 @@ local formatters_by_ft = {
   lua = { "stylua" },
   nix = { "alejandra" },
   nu = { "nufmt" },
-  php = { "php_cs_fixer" },
+  php = { "mago_format" },
   python = { "ruff_format" },
   racket = { lsp_format = "first" },
   rust = { "rustfmt" },

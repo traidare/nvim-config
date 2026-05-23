@@ -99,6 +99,7 @@ inputs: {
     docker = lib.mkDefault true;
     serde = lib.mkDefault true;
     nu = lib.mkDefault true;
+    php = lib.mkDefault true;
     racket = lib.mkDefault true;
     debug = lib.mkDefault false;
     notes = lib.mkDefault true;
@@ -196,6 +197,12 @@ inputs: {
       nil
       nix-doc
       nixd
+    ];
+  };
+
+  config.specs.php = lib.mkIf (config.settings.cats.php or true) {
+    data = null;
+    postpkgs = with pkgs; [
     ];
   };
 
